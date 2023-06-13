@@ -10,8 +10,9 @@ public class Upload implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String id, fileName, fileExtension;
-	private LocalDateTime startedAt, finishedAt;
+	private final String id, fileName, fileExtension;
+	private final LocalDateTime startedAt;
+	private LocalDateTime finishedAt;
 
 	public Upload(String fileName, String fileExtension) {
 		super();

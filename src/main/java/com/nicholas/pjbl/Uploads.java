@@ -14,11 +14,11 @@ import java.util.List;
 
 import com.nicholas.pjbl.domain.Upload;
 
-public class UploadSerializationManager {
+public class Uploads {
 
-	private String serFolder = "C:\\Users\\nicholas.oliveira\\Desktop\\Java Workspace\\pjbl\\serialized-objects\\upload-object";
+	private static String serFolder = "C:\\Users\\nicholas.oliveira\\Desktop\\Java Workspace\\pjbl\\serialized-objects\\upload-object";
 
-	public void saveToFile(List<Upload> uploads) {
+	public  static void saveToFile(List<Upload> uploads) {
 		try (ObjectOutputStream out = new ObjectOutputStream(
 				new BufferedOutputStream(new FileOutputStream(serFolder)))) {
 			for (Upload up : uploads) {
@@ -33,7 +33,7 @@ public class UploadSerializationManager {
 		}
 	}
 
-	public List<Upload> readFromFile() {
+	public static List<Upload> readFromFile() {
 		List<Upload> uploads = new ArrayList<>();
 		try (ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(serFolder)))) {
 			while (true) {

@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.nicholas.pjbl.UploadSerializationManager;
+import com.nicholas.pjbl.Uploads;
 import com.nicholas.pjbl.domain.Upload;
 import com.nicholas.pjbl.observer.SceneObserver;
 import com.nicholas.pjbl.service.FilePathNotFound;
@@ -56,8 +56,6 @@ public class IndexSceneController implements SceneObserver, Initializable {
 
 	private List<Upload> uploads;
 
-	private UploadSerializationManager serializationManager = new UploadSerializationManager();
-
 	private Upload currentUpload;
 
 	@FXML
@@ -67,8 +65,8 @@ public class IndexSceneController implements SceneObserver, Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.uploads = serializationManager.readFromFile();
-
+		this.uploads = Uploads.readFromFile();
+		uploadProgress.setVisible(false);
 		button.setDisable(true);
 		inputArquivo.setOnMouseClicked(e -> {
 			File file = fileChooser.showOpenDialog(stage);
@@ -112,7 +110,7 @@ public class IndexSceneController implements SceneObserver, Initializable {
 						IndexSceneController.this.bytesRead
 								.setText("Upload de " + totalBytesRead + " bytes concluido em " + duration + " ms");
 						IndexSceneController.this.uploads.add(currentUpload);
-						IndexSceneController.this.serializationManager.saveToFile(uploads);
+						Uploads.saveToFile(uploads);
 						IndexSceneController.this.uploadProgress.setProgress(0d);
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.setTitle("Sucesso");
